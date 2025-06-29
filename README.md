@@ -151,7 +151,7 @@ sudo apt-get install terminator
    ```bash
    rostopic echo /move_base_simple/goal
    ```
-> ![Nav2DGoal](assets/Nav2DGoal.mp4)
+> ![Nav2DGoal](assets/nav2dgoal.gif)
 
 ## 📄 License & Author
 > Author: Adham ALI
