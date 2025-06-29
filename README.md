@@ -139,7 +139,7 @@ sudo apt-get install terminator
 > ### Result:
 > You can now see the robot exploring your room in real time on Rviz!
 >
-> ![exploration_2D&3D](assets/exploration_2D&3D.webm)
+> ![exploration_2D&3D](assets/exploration_2D&3D.gif)
 
 ## 🌍 Navigation Goal (2D Nav Goal Command)
 1. Open a new terminal:
