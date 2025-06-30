@@ -28,20 +28,29 @@ To visualize the SLAM process remotely (without having the Jackal tethered to a 
 | USB Multiport Adapter              | Plugged into onboard PC, connects mouse, keyboard, controller |
 | Mini USB → MCU                     | For MCU communication with the PC                     |
 
-> ![Cabling Overview](assets/Cablage.jpg)
+---
 
+<div align="center">
+  <img src="assets/Cablage.jpg" alt="Physical Cabling Overview" width="40%">
+  <p><i>Overview of physical connections on the Jackal robot</i></p>
+</div>
 
 ## 📊 Interface Monitoring (IHM)
 
 Before starting the system, ensure the following indicators are in proper state:
 
-- **M Icon**: ON → Motors are active (toggle with the M button)
-- **Two Arrows**: ON → Communication between onboard PC and MCU is established
-- **WiFi Icon**: ON → Jackal is connected to the local wireless network
-- **Battery Indicator**: GREEN (static) → Battery level is sufficient
-- **Power Button**: BLUE (static) → Jackal is powered ON
+- 🔘 **M Icon**: ON → Motors are active (toggle with the M button)
+- 🔁 **Two Arrows**: ON → Communication between onboard PC and MCU is established
+- 📶 **WiFi Icon**: ON → Jackal is connected to the local wireless network
+- 🔋 **Battery Indicator**: GREEN (static) → Battery level is sufficient
+- 🔵 **Power Button**: BLUE (static) → Jackal is powered ON
 
-> ![IHM Panel](assets/IHM.jpg)
+---
+
+<div align="center">
+  <img src="assets/IHM.jpg" alt="Jackal Interface Monitoring Panel" width="40%">
+  <p><i>Status panel showing correct system readiness</i></p>
+</div>
 
 
 ## 💻 ROS Environment Setup
@@ -60,6 +69,11 @@ Make sure these packages are installed:
 - rtabmap_ros
 - teleop_twist_joy and teleop_twist_keyboard
 
+To verify if the package already exists, you need to execute this by replacing `<name_package>` by the name of the package:
+```bash
+rospack list | grep <name_package>
+```
+
 > Ensure your ~/.bashrc sources the correct ROS workspace and environment.
 
 
@@ -75,7 +89,13 @@ Make sure these packages are installed:
 - Press the left analog stick (L3).
 - Use L2 + left analog to control the robot's motion.
 
-> ![Logitech_instructions](assets/Logitech_instructions.jpg)
+---
+
+<div align="center">
+  <img src="assets/Logitech_instructions.jpg" alt="Logitech F710 Setup Instructions" width="40%">
+  <p><i>Logitech F710 setup guide: switch to 'D' and ensure LED MODE is off</i></p>
+</div>
+
 
 #### Start Teleop:
 ```bash
@@ -91,7 +111,12 @@ cat /dev/input/f710
 - Run rqt_graph
 - Make sure the /teleop_twist_joy node is publishing to /cmd_vel.
 
-> ![rqt-teleop_twist_joy](assets/rqt-teleop_twist_joy.png)
+---
+
+<div align="center"> 
+   <img src="assets/rqt-teleop_twist_joy.png" alt="rqt_graph showing teleop_twist_joy node" width="70%"> 
+   <p><i>ROS graph: <code>/teleop_twist_joy</code> publishing to <code>/cmd_vel</code></i></p> 
+</div>
 
 ### Keyboard:
 Open a new terminal and run:
@@ -103,9 +128,8 @@ Controls:
 - `J` `K` `L` → Rotate counterclockwise / stop / rotate clockwise.
 - `M` `<` `>` → Move backward while turning left / straight / turning right.
 
-
 ## 🔄 Launch Sequence for SLAM Visualization in RViz:
-> Recommended: Install `terminator` for easier multi-terminal management:
+> 💡**Recommended:** Install `terminator` for easier multi-terminal management:
 ```bash
 sudo apt-get install terminator
 ```
@@ -123,35 +147,73 @@ sudo apt-get install terminator
    ```bash
    roslaunch my_rtab_map start_rtabmap_working_D415_RGBD.launch
    ```
-> ![Realsense_Rtabmap](assets/Realsense_Rtabmap.png)
-
-## Displays:
-- Sensors
-  - 2D Lidar: Topic > `/scan_map`
-  - 3D PointCloud (Robosense): Topic > `/rtabmap/cloud_map`
-- Map
-  - Topic >  `/rtabmap/proj_map`
-
-> ![Displays-Map](assets/Displays-Map.png)
 
 ---
 
-> ### Result:
-> You can now see the robot exploring your room in real time on Rviz!
->
-> ![exploration_2D&3D](assets/exploration_2D&3D.gif)
+<div align="center"> 
+   <img src="assets/Realsense_Rtabmap.png" alt="RViz view with Realsense and RTAB-Map" width="75%"> 
+   <p><i>RViz displaying SLAM results with Intel RealSense and RTAB-Map</i></p> 
+</div>
+
+## 🖥️ RViz Displays Configuration
+To properly visualize SLAM data in RViz, make sure the following topics are set in the **Displays** panel:
+
+### 📡 Sensors
+- **2D Lidar**  
+  → Topic: `/scan_map`
+- **3D PointCloud (Robosense)**
+  → Topic: `/rtabmap/cloud_map`
+
+### 🗺️ Map
+- **Projected Map (Explored Space)**  
+  - Topic >  `/rtabmap/proj_map`
+
+
+---
+
+<div align="center">
+  <img src="assets/Displays-Map.png" alt="RViz display topics configuration" width="30%">
+  <p><i>Displays panel in RViz showing correct topic configuration</i></p>
+</div>
+
+
+## 🎯 Result: Real-Time 2D & 3D SLAM Visualization
+After launching all the components, you should now see your robot actively exploring the environment in **real time** on **RViz**, with both:
+
+- 🟢 **2D Lidar map**  
+- 🔵 **3D PointCloud map** from Robosense and RealSense
+
+> 🧭 This live mapping allows you to monitor the SLAM performance and verify correct sensor fusion.
+
+<div align="center">
+  <img src="assets/exploration_2D&3D.gif" alt="Exploration SLAM 2D and 3D" width="80%">
+  <p><i>Live exploration using 2D Lidar + 3D SLAM with Robosense & RealSense</i></p>
+</div>
 
 ## 🌍 Navigation Goal (2D Nav Goal Command)
-1. Open a new terminal:
+
+Once the SLAM environment is launched, you can send autonomous goals to the robot via RViz using the **2D Nav Goal** tool.
+
+### 🚀 Launch the navigation demo:
+Open a new terminal:
    ```bash
    roslaunch jackal_navigation odom_navigation_demo.launch
    ```
-2. On RViz, use the "2D Nav Goal" tool to click and set a destination for the robot.
-3. To monitor target coordinates sent:
-   ```bash
-   rostopic echo /move_base_simple/goal
-   ```
-> ![Nav2DGoal](assets/nav2dgoal.gif)
+### 🖱️ Send a goal in RViz:
+- Use the *2D Nav Goal* button (top toolbar in RViz).
+- Click anywhere on the map and drag to indicate the direction the robot should face.
+- Jackal will autonomously compute a path and navigate toward the goal.
+
+### 📍 Monitor the goal position:
+```bash
+rostopic echo /move_base_simple/goal
+```
+You’ll see the coordinates of each goal you send!
+
+<div align="center"> 
+   <img src="assets/nav2dgoal.gif" alt="2D Navigation Goal in RViz" width="80%"> 
+   <p><i>Autonomous navigation using 2D Nav Goal in RViz</i></p> 
+</div>
 
 ## 📄 License & Author
 > Author: Adham ALI
