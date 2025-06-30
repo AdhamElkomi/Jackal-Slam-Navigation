@@ -141,7 +141,7 @@ sudo apt-get install terminator
    ```
 2. Start RViz with SLAM view:
    ```bash
-   roslaunch my_rtab_map start_rtabmap_working_jackal.launch
+   roslaunch my_rtab_map jackal_hardware.launch
    ```
 3. Launch Intel RealSense camera:
    ```bash
