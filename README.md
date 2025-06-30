@@ -62,14 +62,14 @@ sudo apt update && sudo apt upgrade
 ### 2. Required ROS Packages:
 Make sure these packages are installed:
 
-- jackal_desktop
-- rplidar_ros
-- realsense2_camera
-- robosense_ros
-- rtabmap_ros
-- teleop_twist_joy and teleop_twist_keyboard
+- `jackal_desktop`
+- `rplidar_ros`
+- `realsense2_camera`
+- `robosense_ros`
+- `rtabmap_ros`
+- `teleop_twist_joy` and `teleop_twist_keyboard`
 
-To verify if the package already exists, you need to execute this by replacing `<name_package>` by the name of the package:
+Check if a package is installed:
 ```bash
 rospack list | grep <name_package>
 ```
@@ -79,7 +79,7 @@ rospack list | grep <name_package>
 
 ## 🎮 Manual Control with Controller & Keyboard
 
-### Gamepad (Logitech F710):
+### 🕹️ Gamepad (Logitech F710):
 - Plug the USB adapter into the USB hub on the Jackal.
 - Ensure:
   - **LED MODE** is off.
@@ -118,7 +118,7 @@ cat /dev/input/f710
    <p><i>ROS graph: <code>/teleop_twist_joy</code> publishing to <code>/cmd_vel</code></i></p> 
 </div>
 
-### Keyboard:
+### ⌨️ Keyboard:
 Open a new terminal and run:
 ```bash
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py
@@ -210,10 +210,23 @@ rostopic echo /move_base_simple/goal
 ```
 You’ll see the coordinates of each goal you send!
 
-<div align="center"> 
-   <img src="assets/nav2dgoal.gif" alt="2D Navigation Goal in RViz" width="80%"> 
-   <p><i>Autonomous navigation using 2D Nav Goal in RViz</i></p> 
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="assets/nav2dgoal.gif" alt="2D Navigation Goal in RViz" width="400"/>
+      <p><i>Autonomous navigation using 2D Nav Goal in RViz</i></p>
+    </td>
+    <td align="center">
+      <img src="assets/odom_navigation-arrow.png" alt="Arrow pointing navigation goal" width="400"/>
+      <p><i>Click and drag to set orientation of the goal</i></p>
+    </td>
+  </tr>
+</table>
+
 </div>
+
 
 ## 📄 License & Author
 > Author: Adham ALI
